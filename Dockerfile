@@ -34,6 +34,11 @@ RUN chown ${COMPANY}: /opt/${COMPANY}/mediaserver/var/
 
 RUN echo "currentOsVariantOverride=docker" >> /opt/${COMPANY}/mediaserver/etc/mediaserver.conf
 
+# Disable root-tool to run in non-privileged mode.
+# The /recording folder is not recognized correctly, and the issue can be observed in verbose logs:
+# /recordings (ext4) — not a folder.
+RUN echo "ignoreRootTool=true" >> /opt/${COMPANY}/mediaserver/etc/mediaserver.conf
+
 ADD entrypoint.sh /opt/mediaserver/
 
 USER ${COMPANY}

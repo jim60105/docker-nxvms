@@ -20,13 +20,5 @@ services:
       - ${VOLUMES_PATH}/nx_ini:/home/${COMPANY}/.config/nx_ini
       - ${VOLUMES_PATH}/entrypoint.d:/opt/mediaserver/entrypoint.d
       - ${VOLUMES_PATH}/recordings:/recordings
-      - ${VOLUMES_PATH}/tmp:/tmp
-
-  mediaserver-root-tool:
-    image: metavms-server:${MEDIASERVER_VERSION}
-    user: root
-    # root-tool-bin is for versions < 4.3, root-tool is for versions >= 4.3.
-    command: ["/opt/${COMPANY}/mediaserver/bin/root-tool"]
-    volumes:
-      - ${VOLUMES_PATH}/tmp:/tmp
-      - ${VOLUMES_PATH}/recordings:/recordings
+    tmpfs:
+      - /tmp

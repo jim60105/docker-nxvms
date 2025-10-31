@@ -68,7 +68,7 @@ Volumes are required to configure the Sever and save its state data.
 | /srv/mediaserver/nx_ini       | Additional configuration  | /home/${COMPANY}/.config/nx_ini   |
 | /srv/mediaserver/recordings   | Video storage             | /recordings                       |
 | /srv/mediaserver/var          | State and logs            | /opt/networkoptix/mediaserver/var |
-| /srv/mediaserver/tmp          | Unix socket and tmp files | /opt/networkoptix/mediaserver/tmp |
+| **TMPFS**           		| Unix socket and tmp files | /opt/networkoptix/mediaserver/tmp |
 
 Note that the video storage location, if modified, needs to be short. Changing the name 
 is fine but changing the path may result in no valid storage location.
