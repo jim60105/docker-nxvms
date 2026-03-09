@@ -8,17 +8,17 @@ services:
       dockerfile: Containerfile
       args:
         COMPANY: ${COMPANY}
-    image: metavms-server:${MEDIASERVER_VERSION}
+    # image: metavms-server:${MEDIASERVER_VERSION}
     user: ${COMPANY}
     ports:
       - ${PORTS}
     # To use the host network mode, comment out the ports above and uncomment the line below.
     # network_mode: "host"
     volumes:
-      - ${VOLUMES_PATH}/etc:/opt/${COMPANY}/mediaserver/etc
-      - ${VOLUMES_PATH}/var:/opt/${COMPANY}/mediaserver/var
-      - ${VOLUMES_PATH}/nx_ini:/home/${COMPANY}/.config/nx_ini
-      - ${VOLUMES_PATH}/entrypoint.d:/opt/mediaserver/entrypoint.d
-      - ${VOLUMES_PATH}/recordings:/recordings
+      - ./config-volumes/etc:/opt/${COMPANY}/mediaserver/etc:z
+      - ./config-volumes/var:/opt/${COMPANY}/mediaserver/var:z
+      - ./config-volumes/nx_ini:/home/${COMPANY}/.config/nx_ini:z
+      - ./config-volumes/entrypoint.d:/opt/mediaserver/entrypoint.d:z
+      - ./config-volumes/recordings:/recordings:z
     tmpfs:
       - /tmp
