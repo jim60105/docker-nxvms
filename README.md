@@ -5,18 +5,18 @@
 
 ## Abstract ##
 
-This repository provides a production-ready containerized deployment solution for the application, complete with Docker configuration files and supporting automation scripts. The project is designed as a turnkey deployment package intended to be used as-is without modification.
+This repository provides a production-ready containerized deployment solution for the application, complete with container configuration files and supporting automation scripts. The project is designed as a turnkey deployment package intended to be used as-is without modification.
 
 ## Deployment Standard ##
-Docker Compose is the default and recommended deployment method for this application. All components, configurations, and dependencies have been carefully orchestrated through the included compose.yaml file to ensure reliable and reproducible deployments across different environments.
+Podman Compose is the default and recommended deployment method for this application. All components, configurations, and dependencies have been carefully orchestrated through the included compose.yaml file to ensure reliable and reproducible deployments across different environments.
 
 ## Quality Assurance ##
-This containerized deployment configuration represents the official testing standard used by our QA team. All quality assurance processes, integration tests, and performance validations are conducted using this exact Docker Compose setup with the specified application version. This ensures that the deployment method you use in production mirrors the extensively tested configuration validated by our quality assurance protocols.
+This containerized deployment configuration represents the official testing standard used by our QA team. All quality assurance processes, integration tests, and performance validations are conducted using this exact Podman Compose setup with the specified application version. This ensures that the deployment method you use in production mirrors the extensively tested configuration validated by our quality assurance protocols.
 
 ## Version Compliance ##
 This deployment package is version-locked and tested specifically with the application version specified in the configuration files. Using this repository as-is ensures compatibility and stability as verified through our comprehensive QA process.
 
-By utilizing this Docker Compose-based deployment, you benefit from a thoroughly tested, standardized installation that matches our official QA environment, minimizing deployment variations and ensuring consistent behavior across all instances.
+By utilizing this Podman Compose-based deployment, you benefit from a thoroughly tested, standardized installation that matches our official QA environment, minimizing deployment variations and ensuring consistent behavior across all instances.
 
 ## Restrictions ##
 
@@ -45,12 +45,12 @@ Building an image from the current directory uses the included [Containerfile](C
 The build automatically fetches the latest Nx Meta VMS Server release from the official API — no
 manual version pinning required.
 
-Recommended way is to use [Docker Compose](https://docs.docker.com/compose/) utility.
-Follow [Installation guide](https://docs.docker.com/compose/install/).
+Recommended way is to use [Podman Compose](https://github.com/containers/podman-compose) utility.
+Follow [Installation guide](https://github.com/containers/podman-compose#installation).
 Review [build environment configuration](.env). Build image:
 
 ```bash
-docker compose build
+podman compose build
 ```
 
 ## Run ##
@@ -63,13 +63,13 @@ path is required.
 
 ```bash
 # Run containers in the daemon mode.
-docker compose up -d
+podman compose up -d
 ```
 
 ## Cleanup ##
 ```bash
 # Stop services and remove containers.
-docker compose down
+podman compose down
 
 # Remove persisted volume data.
 rm -rf ./config-volumes/etc/* ./config-volumes/var/* ./config-volumes/recordings/*
@@ -138,8 +138,8 @@ support. For more details see https://support.networkoptix.com/hc/en-us/articles
 Both in-client and manual image updates will invalidate licenses.
 If update is required, the new image should be built and deployed:
 ```bash
-docker compose down
+podman compose down
 
-docker compose build
-docker compose up -d
+podman compose build
+podman compose up -d
 ```

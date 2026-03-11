@@ -1,5 +1,5 @@
-## Extending Docker Images for Additional Features ##
+## Extending Container Images for Additional Features ##
 
 // Copyright 2018-present Network Optix, Inc. Licensed under MPL 2.0: www.mozilla.org/MPL/2.0/
 
-This directory contains Dockerfiles enhanced with additional functionality.
+This directory contains Containerfiles enhanced with additional functionality.

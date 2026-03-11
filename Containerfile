@@ -56,7 +56,7 @@ RUN install -d -m 775 -o ${COMPANY} -g 0 \
         /opt/${COMPANY}/mediaserver/var \
         /recordings
 
-# Configure mediaserver for Docker environment
+# Configure mediaserver for container environment
 # Disable root-tool to run in non-privileged mode
 # The /recording folder is not recognized correctly without this setting
 RUN echo "currentOsVariantOverride=docker" >> /opt/${COMPANY}/mediaserver/etc/mediaserver.conf && \
