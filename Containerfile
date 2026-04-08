@@ -51,10 +51,9 @@ RUN --mount=type=cache,id=apt-$TARGETARCH$TARGETVARIANT,sharing=locked,target=/v
     chattr -i /lib/systemd/systemd-coredump
 
 # Fix permissions and create volume directories
-RUN install -d -m 775 -o ${COMPANY} -g 0 \
-        /opt/${COMPANY}/mediaserver/etc \
-        /opt/${COMPANY}/mediaserver/var \
-        /recordings
+RUN install -d -m 775 -o ${COMPANY} -g 0 /opt/${COMPANY}/mediaserver/etc && \
+    install -d -m 775 -o ${COMPANY} -g 0 /opt/${COMPANY}/mediaserver/var && \
+    install -d -m 775 -o ${COMPANY} -g 0 /recordings
 
 # Configure mediaserver for container environment
 # Disable root-tool to run in non-privileged mode
@@ -62,20 +61,20 @@ RUN install -d -m 775 -o ${COMPANY} -g 0 \
 RUN echo "currentOsVariantOverride=docker" >> /opt/${COMPANY}/mediaserver/etc/mediaserver.conf && \
     echo "ignoreRootTool=true" >> /opt/${COMPANY}/mediaserver/etc/mediaserver.conf
 
-COPY --link --chmod=775 entrypoint.sh /opt/mediaserver/entrypoint.sh
+COPY --link --chmod=775 entrypoint.sh /opt/${COMPANY}/mediaserver/entrypoint.sh
+
+ENV PATH="/opt/${COMPANY}/mediaserver/bin${PATH:+:${PATH}}"
 
 WORKDIR /home/${COMPANY}
 
-VOLUME /opt/${COMPANY}/mediaserver/etc \
-       /opt/${COMPANY}/mediaserver/var \
-       /recordings
+VOLUME [ "/opt/${COMPANY}/mediaserver/etc", "/opt/${COMPANY}/mediaserver/var", "/recordings" ]
 
 EXPOSE 7001
 
 USER ${COMPANY}
 
 # Runs the media server on container start unless argument(s) specified
-ENTRYPOINT ["/opt/mediaserver/entrypoint.sh"]
+ENTRYPOINT "/opt/${COMPANY}/mediaserver/entrypoint.sh"
 
 ARG VERSION
 ARG RELEASE
